@@ -7,8 +7,14 @@
 > **Autor / Full-Stack Developer:** Emmanuel Sánchez  
 > **Ubicación del Monorepo:** `D:\novamart_landing_chatbot`
 
----
+## 📺 Video Demostrativo en Vivo
 
+[![NVIDIA NIM + React NovaMart Showcase](docs/images/thumbnail_showcase.jpg)](https://youtu.be/q-2JvYxbiRQ)
+
+> 👆 *Haz clic en la imagen superior para ver el video en YouTube.*  
+> 🔗 **Enlace directo:** [https://youtu.be/q-2JvYxbiRQ](https://youtu.be/q-2JvYxbiRQ)
+
+---
 ## 🧭 1. Resumen de la Implementación
 
 El proyecto se construyó de extremo a extremo en arquitectura **BFF (Backend for Frontend)** desacoplada, cumpliendo al 100% con los criterios de evaluación de la rúbrica oficial (100 puntos):
@@ -146,3 +152,4 @@ Desplázate a la sección **"Arquitectura Enterprise NovaMart"** en la Landing y
 
 ### [4:45 - 5:00] Cierre
 Agradece la atención del profesor Fernando Morquecho y responde a sus preguntas.
+

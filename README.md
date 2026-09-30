@@ -8,11 +8,12 @@
 > **Autor / Full-Stack Developer:** Emmanuel Sánchez  
 > 📺 **Video Demostrativo en YouTube:** [https://youtu.be/q-2JvYxbiRQ](https://youtu.be/q-2JvYxbiRQ)
 
----
-
 ## 📺 Video de Demostración en Vivo
-Haz clic en el enlace a continuación para ver el video completo demostrando todos los criterios de la rúbrica en acción:
-👉 **[Ver Demostración en YouTube (https://youtu.be/q-2JvYxbiRQ)](https://youtu.be/q-2JvYxbiRQ)**
+
+[![NVIDIA NIM + React NovaMart Showcase](docs/images/thumbnail_showcase.jpg)](https://youtu.be/q-2JvYxbiRQ)
+
+> 👆 *Haz clic en la imagen superior para reproducir el video en YouTube demostrando todos los criterios de la rúbrica en acción.*  
+> 🔗 **Enlace directo:** [https://youtu.be/q-2JvYxbiRQ](https://youtu.be/q-2JvYxbiRQ)
 
 ---
 
