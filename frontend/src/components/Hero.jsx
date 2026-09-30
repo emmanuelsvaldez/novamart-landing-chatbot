@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Zap, Bot, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Zap, Bot, ArrowRight, CheckCircle2, Video } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -37,6 +37,15 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-700 font-semibold text-sm border border-slate-300 shadow-sm hover:bg-slate-50 transition-all"
             >
               <span>Explorar Catálogo</span>
+            </a>
+            <a
+              href="https://youtu.be/AeL1Lu7lOTw"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 font-semibold text-sm shadow-xs hover:bg-rose-100 transition-all active:scale-95"
+            >
+              <Video className="w-4 h-4 text-rose-600" />
+              <span>Ver Video Demo</span>
             </a>
           </div>
 

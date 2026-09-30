@@ -3,229 +3,223 @@
 > **Proyecto Oficial de Evaluación - Semana 3**  
 > **Bootcamp SKALA:** Inteligencia Artificial & Agentes Enterprise  
 > **Instructor:** M. C. Fernando Morquecho  
-> **Fecha de Presentación en Vivo:** Miércoles 30 de septiembre de 2026  
-> **Autor / Full-Stack Developer:** Emmanuel Sánchez
+> **Fecha de Evaluación:** Miércoles 30 de septiembre de 2026  
+> **Modelo en Inferencia:** `nvidia/nemotron-3-ultra-550b-a55b` (NVIDIA NIM)  
+> **Autor / Full-Stack Developer:** Emmanuel Sánchez  
+> 📺 **Video Demostrativo en YouTube:** [https://youtu.be/AeL1Lu7lOTw](https://youtu.be/AeL1Lu7lOTw)
 
 ---
 
-## 🎯 1. Resumen Ejecutivo y Rúbrica de Evaluación (100 / 100 Puntos)
+## 📺 Video de Demostración en Vivo
+Haz clic en el enlace a continuación para ver el video completo demostrando todos los criterios de la rúbrica en acción:
+👉 **[Ver Demostración en YouTube (https://youtu.be/AeL1Lu7lOTw)](https://youtu.be/AeL1Lu7lOTw)**
 
-Este proyecto implementa una solución desacoplada de extremo a extremo basada en el patrón arquitectónico **BFF (Backend for Frontend)** para la tienda departamental **NovaMart**. Consta de una **Landing Page comercial responsiva** en React con una **tabla reactiva de pedidos** y un **Widget de Chatbot flotante** gobernado por **Guardrails deterministas** y conectado al servicio de inferencia en la nube de **NVIDIA NIM** (familia NVIDIA Nemotron 3 Ultra (550B)).
+---
+
+## 🎯 1. Resumen Ejecutivo y Metas de Rúbrica (100 / 100 Puntos)
+
+Este proyecto implementa una solución empresarial desacoplada basada en el patrón arquitectónico **BFF (Backend for Frontend)** para la tienda **NovaMart**. Consta de una **Landing Page comercial responsiva** en React con una **tabla reactiva de pedidos** y un **Widget de Chatbot flotante** gobernado por **Guardrails deterministas** y conectado en tiempo real al microservicio de inferencia de **NVIDIA NIM** utilizando el modelo de alta capacidad **`nvidia/nemotron-3-ultra-550b-a55b`**.
 
 ### Matriz de Cumplimiento Técnico de la Rúbrica
 
 | Criterio Oficial de Rúbrica | Pts | Estado | Estrategia de Cumplimiento Técnico |
 | :--- | :---: | :---: | :--- |
 | **1. Repositorio privado ordenado** | **10** | ✅ | Monorepo limpio (`/frontend`, `/backend`, `/docs`), sin archivos basura, con `.gitignore` riguroso. |
-| **2. Landing page funcional en localhost** | **15** | ✅ | Vite + React + Tailwind CSS (`:5173`), catálogo comercial con productos NovaMart y tabla reactiva de pedidos. |
-| **3. Widget de chatbot usable** | **15** | ✅ | Componente flotante con animaciones fluidas, indicador "pensando...", chips de prueba rápida y scroll automático. |
-| **4. Conexión correcta con NVIDIA NIM** | **20** | ✅ | Inferencia real mediante SDK oficial OpenAI hacia el endpoint `https://integrate.api.nvidia.com/v1` con fallback resiliente. |
+| **2. Landing page funcional en localhost** | **15** | ✅ | App React en Vite con Tailwind CSS (`:5173`), catálogo comercial con productos NovaMart y tabla reactiva de pedidos. |
+| **3. Widget de chatbot usable** | **15** | ✅ | Componente flotante con animaciones fluidas, indicador "pensando...", chips de prueba rápida, soporte Markdown y auto-scroll. |
+| **4. Conexión correcta con NVIDIA NIM** | **20** | ✅ | Inferencia real mediante SDK oficial OpenAI hacia el endpoint `https://integrate.api.nvidia.com/v1` con `nvidia/nemotron-3-ultra-550b-a55b`. |
 | **5. Prompt de sistema estricto** | **15** | ✅ | Prompt inyectado en servidor con reglas inmutables; prohíbe temas ajenos y redirige cortésmente. |
 | **6. Pruebas de estatus, rastreo y cancelación** | **15** | ✅ | Soporte integral de `ORD-1001` a `ORD-1004`, flujo de cancelación en 2 fases (advertencia irreversible + confirmación "sí"). |
 | **7. Datos faltantes y fuera de tema** | **10** | ✅ | Rechazo estricto con la frase oficial ante desvíos (receta de pizza, poemas) y solicitud cordial de ID en formato `ORD-####`. |
-| **8. No exposición de credenciales** | **10** | ✅ | `NVIDIA_API_KEY` vive 100% en `backend/.env`, nunca viaja al frontend ni se sube al control de versiones (`.gitignore`). |
+| **8. No exposición de credenciales** | **10** | ✅ | `NVIDIA_API_KEY` vive 100% en `backend/.env`, nunca viaja al frontend ni se sube a GitHub (`.gitignore`). |
 | **PUNTAJE TOTAL ESPERADO** | **100** | **100%** | **Listo para entrega y demostración en vivo.** |
 
 ---
 
-## 🏛️ 2. Arquitectura de Software: Patrón BFF Desacoplado
+## 🏛️ 2. Arquitectura de Software y Diagramas de Flujo
 
+### 2.1 Diagrama de Arquitectura Global (Patrón BFF)
+
+```mermaid
+flowchart TD
+    subgraph FrontendApp ["🎨 Capa de Presentación (Frontend :5173)"]
+        Navbar["Navbar NovaMart (Health Check :8000)"]
+        Hero["Hero Section & Enlace a Video Demo"]
+        Catalog["Catálogo de Productos Tecnológicos"]
+        OrdersView["Dashboard Reactivo de Pedidos (ORD-1001 a 1004)"]
+        ChatWidget["Widget Flotante de Chatbot (Stateful + Markdown)"]
+    end
+
+    subgraph BackendApp ["🛡️ Capa de Gobernanza & BFF (FastAPI :8000)"]
+        CORS["Middleware CORS (allow_origins localhost:5173)"]
+        Router["FastAPI Router (/api/chat, /api/orders, /api/orders/reset)"]
+        Guardrails["Filtro Anti-Desvío & Detector de Confirmación"]
+        Tools["Módulo de Herramientas Logísticas (tools.py)"]
+        MockDB[("Base de Datos en Memoria\n(Sesión Activa - ORD-1001 a 1004)")]
+        NIM_Service["Servicio de Inferencia Asíncrono / Thread-Safe"]
+    end
+
+    subgraph CloudNIM ["☁️ Capa de Inferencia Externa"]
+        NIM_API["NVIDIA NIM Runtime API\n(integrate.api.nvidia.com/v1)\nModelo: nvidia/nemotron-3-ultra-550b-a55b"]
+    end
+
+    ChatWidget -->|POST /api/chat {message, history}| CORS
+    OrdersView -->|GET /api/orders| CORS
+    OrdersView -->|POST /api/orders/reset| CORS
+    CORS --> Router
+    Router --> Guardrails
+    Guardrails -- "Tema Ajeno (Pizza, Poema)" --> Router
+    Guardrails -- "Dato Faltante (Sin ORD-####)" --> Router
+    Guardrails -- "Confirmación Sí / Cancelación" --> Tools
+    Guardrails -- "Consulta Válida" --> Tools
+    Tools <--> MockDB
+    Tools --> NIM_Service
+    NIM_Service <-->|TLS / OpenAI SDK Client| NIM_API
 ```
-+-----------------------------------------------------------------------------------+
-|                           FRONTEND LOCAL (React + Vite :5173)                     |
-|  - Navbar & Hero Comercial NovaMart                                               |
-|  - Catálogo de Productos Tecnológicos                                            |
-|  - Tabla Reactiva de Pedidos (ORD-1001 a ORD-1004)                                |
-|  - Widget Flotante de Chatbot Asistente (Auto-scroll + Indicador "Pensando...")   |
-+------------------------------------------+----------------------------------------+
-                                           |
-                                           | HTTP JSON / REST (CORS Habilitado)
-                                           v
-+-----------------------------------------------------------------------------------+
-|                        BACKEND LOCAL - BFF (FastAPI :8000)                        |
-|  - CORS Middleware (allow_origins localhost:5173)                                 |
-|  - Filtro Anti-Desvío Estricto (Guardrails deterministas contra poemas/pizzas)    |
-|  - Validador y Extractor de Formato ORD-####                                      |
-|  - Módulo de Tools Logísticas (consultar, rastrear, validar, cancelar)           |
-|  - Base de Datos Simulada en Memoria (Stateful durante la sesión)                 |
-+------------------------------------------+----------------------------------------+
-                                           |
-                                           | TLS / OpenAI SDK (Key protegida en .env)
-                                           v
-+-----------------------------------------------------------------------------------+
-|                     PROVEEDOR DE INFERENCIA CLOUD: NVIDIA NIM                     |
-|  - Endpoint: https://integrate.api.nvidia.com/v1                                  |
-|  - Modelo: nvidia/nemotron-3-ultra-550b-a55b         |
-+-----------------------------------------------------------------------------------+
+
+### 2.2 Diagrama de Secuencia: Flujo de Cancelación en 2 Fases
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Usuario
+    participant Widget as Chat Widget (React)
+    participant Backend as FastAPI BFF (:8000)
+    participant Guardrails as Guardrails & Tools
+    participant NIM as NVIDIA NIM (Nemotron)
+    participant Tabla as Orders Table (React)
+
+    Usuario->>Widget: "Quiero cancelar ORD-1004"
+    Widget->>Backend: POST /api/chat
+    Backend->>Guardrails: validar_cancelacion("ORD-1004")
+    Guardrails-->>Backend: can_cancel=True (Pendiente de pago)
+    Backend->>NIM: Inferencia con advertencia irreversible
+    NIM-->>Backend: "¿Deseas cancelarlo? (Responde 'sí' o 'no')"
+    Backend-->>Widget: Respuesta al usuario
+    Usuario->>Widget: "Sí, confirmo la cancelación"
+    Widget->>Backend: POST /api/chat con historial previo
+    Backend->>Guardrails: check_pending_cancellation_confirmation()
+    Guardrails->>Guardrails: ejecutar_cancelacion("ORD-1004") en Mock DB
+    Backend-->>Widget: {reply: "✅ Cancelado con éxito", order_updated: {status: "Cancelado"}}
+    Widget->>Tabla: onOrderUpdated() (Actualiza estado visual sin recargar)
 ```
 
 ---
 
-## 📂 3. Estructura del Proyecto (Monorepo)
+## 🔒 3. Seguridad y Política de Cero Exposición de Credenciales
+
+En estricto cumplimiento con la rúbrica oficial (Criterio 8: 10 Pts):
+
+1. **Aislamiento Total del Secreto:** La llave `NVIDIA_API_KEY` reside exclusivamente en el archivo `backend/.env`.
+2. **Protección en Git:** El archivo `.gitignore` en la raíz prohíbe de forma exhaustiva la inclusión de:
+   - Archivos de entorno: `.env`, `.env.local`, `.env.*.local`
+   - Entornos virtuales: `venv/`, `.venv/`, `env/`
+   - Dependencias de Node: `node_modules/`
+   - Artefactos compilados: `dist/`, `build/`, `__pycache__/`
+3. **Plantilla Pública Segura:** Se provee únicamente `backend/.env.example` con valores genéricos de muestra (`nvapi-your-key-here`).
+4. **BFF Seguro:** El navegador del usuario jamás se comunica directamente con NVIDIA NIM ni recibe tokens; todas las peticiones son procesadas y validadas por el servidor local de FastAPI.
+
+---
+
+## 📂 4. Estructura del Monorepo
 
 ```
 novamart_landing_chatbot/
 ├── .gitignore                    # Excluye .env, venv/, node_modules/, dist/, __pycache__/
-├── README.md                     # Documentación completa y guion de evaluación
-├── start_backend.ps1             # Script de arranque rápido para FastAPI
-├── start_frontend.ps1            # Script de arranque rápido para Vite + React
-├── docs/                         # Documentación técnica adicional y diagramas
-├── backend/                      # Backend for Frontend (FastAPI :8000)
-│   ├── .env                      # Llave privada NVIDIA_API_KEY (protegida)
-│   ├── .env.example              # Plantilla pública sin secretos
-│   ├── requirements.txt          # fastapi, uvicorn, openai, pydantic, python-dotenv
-│   ├── test_rubric.py            # Suite automatizada de pruebas de los casos de rúbrica
+├── README.md                     # Documentación completa, diagramas y guion
+├── WALKTHROUGH.md                # Bitácora detallada de construcción y pruebas
+├── start_backend.ps1             # Lanzador rápido de FastAPI
+├── start_frontend.ps1            # Lanzador rápido de React + Vite
+├── docs/
+│   ├── arquitectura.md           # Explicación técnica extendida de arquitectura
+│   └── WALKTHROUGH.md            # Copia oficial de la bitácora
+├── backend/
+│   ├── .env                      # Llave privada NVIDIA_API_KEY (PROTEGIDA)
+│   ├── .env.example              # Plantilla sanitizada para el repositorio
+│   ├── requirements.txt          # fastapi, uvicorn, openai, pydantic, python-dotenv, httpx
+│   ├── test_rubric.py            # Batería automatizada de pruebas de rúbrica
 │   └── app/
 │       ├── __init__.py
 │       ├── config.py             # Carga y validación de variables de entorno
 │       ├── database.py           # Repositorio en memoria (ORD-1001 a 1004)
-│       ├── guardrails.py         # Filtro anti-desvío estricto y detector de confirmación
-│       ├── tools.py              # Herramientas de consulta, rastreo y cancelación
-│       ├── nim_service.py        # Conexión oficial a NVIDIA NIM vía SDK de OpenAI
-│       └── main.py               # Endpoints REST y Middleware CORS
-└── frontend/                     # Aplicación Web (React + Vite + Tailwind :5173)
+│       ├── guardrails.py         # Filtro estricto anti-desvío y confirmación en 2 fases
+│       ├── tools.py              # Herramientas: consultar, rastrear, validar, cancelar
+│       ├── nim_service.py        # Conexión oficial a NVIDIA NIM (Nemotron 3 Ultra)
+│       └── main.py               # Endpoints REST, CORS y manejo de sesión
+└── frontend/
     ├── package.json
     ├── vite.config.js
     ├── tailwind.config.js
-    ├── postcss.config.js
     └── src/
-        ├── App.jsx               # Integración de landing, tabla y widget reactivo
-        ├── main.jsx
-        ├── index.css             # Directivas de Tailwind CSS
+        ├── App.jsx               # Aplicación principal reactiva
         └── components/
-            ├── Navbar.jsx        # Barra superior con health-check en tiempo real
-            ├── Hero.jsx          # Sección comercial de NovaMart
-            ├── ProductCatalog.jsx# Catálogo comercial interactivo
-            ├── OrdersTable.jsx   # Tabla reactiva con botón de refresco y reinicio
-            ├── ArchitectureSection.jsx # Explicación interactiva de los 4 conceptos de rúbrica
-            └── ChatWidget.jsx    # Widget flotante animado con chips de demostración
+            ├── Navbar.jsx        # Branding y health-check en tiempo real
+            ├── Hero.jsx          # Banner comercial y enlace al Video Demo
+            ├── ProductCatalog.jsx# Catálogo comercial de artículos
+            ├── OrdersTable.jsx   # Tabla reactiva con botón "Reiniciar Demo"
+            ├── ArchitectureSection.jsx # Tarjetas interactivas de los 4 conceptos clave
+            └── ChatWidget.jsx    # Widget flotante con soporte Markdown, chips y scroll
 ```
 
 ---
 
-## ⚡ 4. Guía de Instalación y Ejecución Rápida
+## ⚡ 5. Instrucciones de Instalación y Ejecución Local
 
-### Requisitos Previos
-- **Python 3.10+** (probado en Python 3.14)
-- **Node.js 18+** y **npm** (probado en Node v24)
-- **Git**
-
----
-
-### Paso 1: Configurar y Levantar el Backend (FastAPI :8000)
-
-1. Abre una terminal de PowerShell y navega a la carpeta del backend:
-   ```powershell
-   cd D:\novamart_landing_chatbot\backend
-   ```
-2. Activa el entorno virtual:
-   ```powershell
-   .\venv\Scripts\Activate.ps1
-   ```
-3. Configura tu llave de NVIDIA NIM en el archivo `.env`:
-   ```bash
-   NVIDIA_API_KEY=nvapi-TU-LLAVE-AQUI
-   NVIDIA_BASE_URL=https://integrate.api.nvidia.com/v1
-   NVIDIA_MODEL=nvidia/nemotron-3-ultra-550b-a55b
-   PORT=8000
-   ```
-   *(Nota: Si no cuentas con llave activa en el momento de la prueba, el sistema incluye un motor con guardrails deterministas que responderá con 100% de apego a la rúbrica sin interrumpir la demo).*
-
-4. Inicia el servidor de FastAPI:
-   ```powershell
-   uvicorn app.main:app --reload --port 8000 --host 0.0.0.0
-   ```
-   El backend estará disponible en: **http://localhost:8000**  
-   Documentación interactiva Swagger: **http://localhost:8000/docs**
-
----
-
-### Paso 2: Configurar y Levantar el Frontend (React :5173)
-
-1. Abre **otra** terminal y dirígete a la carpeta `frontend/`:
-   ```powershell
-   cd D:\novamart_landing_chatbot\frontend
-   ```
-2. Ejecuta el servidor de desarrollo de Vite:
-   ```powershell
-   npm run dev
-   ```
-3. Abre tu navegador web en: **http://localhost:5173**
-
----
-
-## 🧪 5. Batería de Pruebas Automatizadas
-
-El backend incluye un script que valida automáticamente todos los requerimientos de la rúbrica:
-
+### Paso 1: Backend de FastAPI
 ```powershell
-cd D:\novamart_landing_chatbot\backend
-.\venv\Scripts\python.exe test_rubric.py
+# Opción directa con el script incluido:
+.\start_backend.ps1
+
+# O manualmente:
+cd backend
+.\venv\Scripts\Activate.ps1
+uvicorn app.main:app --reload --port 8000 --host 0.0.0.0
+```
+- API en vivo: **http://localhost:8000**
+- Swagger Docs interactivo: **http://localhost:8000/docs**
+
+### Paso 2: Frontend de React + Vite
+```powershell
+# Opción directa con el script incluido:
+.\start_frontend.ps1
+
+# O manualmente:
+cd frontend
+npm run dev
+```
+- Aplicación web: **http://localhost:5173**
+
+---
+
+## 🧪 6. Validación de Pruebas Automatizadas
+
+Ejecución de `test_rubric.py` con el modelo real `nvidia/nemotron-3-ultra-550b-a55b`:
+
+```text
+--- INICIANDO BATERIA DE PRUEBAS DE RUBRICA (NVIDIA NIM) ---
+[OK] GET /api/orders exitoso: 4 pedidos recuperados.
+[OK] Caso 1 (ORD-1001): Tu pedido ORD-1001 se encuentra "En preparación" en el Almacén NovaMart... | Source: nvidia_nim
+[OK] Caso 2 (ORD-1002): Tu pedido ORD-1002 está en ruta y fue registrado en Tijuana. | Source: nvidia_nim
+[OK] Caso 3.1 (ORD-1002 no cancelable): El pedido ORD-1002 no puede cancelarse porque ya se encuentra "En tránsito"... | Source: nvidia_nim
+[OK] Caso 4.1 (Petición confirmación ORD-1004): Acción irreversible. ¿Deseas cancelarlo? (Responde 'sí' o 'no'). | Source: nvidia_nim
+[OK] Caso 4.2 (Confirmación ejecutada): ✅ Tu pedido ORD-1004 ha sido cancelado con éxito. | Tool: cancelar_pedido
+[OK] Caso 5.1 (Pizza rechazada): Solo puedo ayudarte con consultas relacionadas con pedidos de NovaMart, como estatus, rastreo o cancelaciones.
+[OK] Caso 5.2 (Poema rechazado): Solo puedo ayudarte con consultas relacionadas con pedidos de NovaMart, como estatus, rastreo o cancelaciones.
+[OK] Caso 6 (Dato faltante): Por favor indícame tu número de pedido con formato ORD-####...
+
+TODAS LAS PRUEBAS DE RUBRICA CON NVIDIA NIM PASARON AL 100%!
 ```
 
-### Resultados de la Verificación:
-- ✅ `GET /api/orders` -> 4 pedidos cargados en memoria.
-- ✅ `Caso 1: Estatus ORD-1001` -> Informa estatus 'En preparación' en Almacén NovaMart.
-- ✅ `Caso 2: Rastrear ORD-1002` -> Informa 'En tránsito' en Centro de distribución Tijuana.
-- ✅ `Caso 3: Cancelar ORD-1002` -> Niega cancelación porque ya está en tránsito y explica la causa operativa.
-- ✅ `Caso 4: Cancelar ORD-1004` -> Advertencia de acción irreversible y confirmación en 2 fases con actualización reactiva en la tabla.
-- ✅ `Caso 5: Anti-desvío (Pizza y Poema)` -> Responde textualmente: *"Solo puedo ayudarte con consultas relacionadas con pedidos de NovaMart, como estatus, rastreo o cancelaciones."*
-- ✅ `Caso 6: Dato faltante` -> Solicita cordialmente número con formato `ORD-####`.
-
 ---
 
-## 🎙️ 6. Guion de Exposición en Vivo (5 Minutos Cronometrados)
+## 🎙️ 7. Guion Cronometrado para la Exposición (5 Minutos)
 
-Para la presentación con el profesor **Fernando Morquecho**, sigue este cronograma exacto:
-
-### Minuto 0:00 - 1:00 | La Landing Comercial y Tabla de Pedidos
-- Muestra en el navegador **http://localhost:5173**.
-- Destaca el branding de NovaMart, el catálogo de productos y el indicador en verde: `FastAPI :8000 Online`.
-- Enseña la **Tabla Reactiva de Pedidos** con los 4 pedidos iniciales:
-  - `ORD-1001`: En preparación (Almacén NovaMart).
-  - `ORD-1002`: En tránsito (CD Tijuana).
-  - `ORD-1003`: Entregado (Entregado al cliente).
-  - `ORD-1004`: Pendiente de pago (Sin envío).
-
-### Minuto 1:00 - 2:30 | Demostración Interactiva del Chatbot
-- Haz clic en el botón flotante en la esquina inferior derecha para abrir el **NovaMart Assistant**.
-- Ejecuta las pruebas en orden (puedes usar los botones de acceso rápido superiores o escribir):
-  1. **Estatus ORD-1001:** `¿Cuál es el estado de ORD-1001?`  
-     *Resultado:* Informa que está en preparación sin guía de envío.
-  2. **Rastreo ORD-1002:** `¿Dónde está mi pedido ORD-1002?`  
-     *Resultado:* Muestra ubicación en tiempo real en Tijuana.
-  3. **Intento de cancelación no permitida:** `Quiero cancelar ORD-1002`  
-     *Resultado:* Explica amablemente que al estar en tránsito no es cancelable.
-  4. **Cancelación en 2 fases de ORD-1004:**  
-     - Paso A: `Quiero cancelar ORD-1004` -> El bot advierte que es irreversible y pregunta: *¿Deseas cancelarlo? (Responde 'sí' o 'no')*.  
-     - Paso B: `Sí, confirmo la cancelación` -> El bot confirma la cancelación exitosa y **la tabla en la pantalla superior cambia automáticamente el estatus a "Cancelado" sin recargar la página**.
-
-### Minuto 2:30 - 3:45 | Preguntas Conceptuales de Rúbrica & Arquitectura
-Abre la sección inferior de la Landing ("Arquitectura Enterprise NovaMart") o tu terminal y responde los 4 puntos clave:
-1. **¿Qué es la aplicación local?**  
-   Es el monorepo compuesto por la interfaz en **React + Vite (:5173)** y el servidor BFF en **FastAPI (:8000)**. Contiene la base de datos en memoria, las herramientas de consulta y las validaciones de negocio.
-2. **¿Qué es NVIDIA NIM?**  
-   Es un microservicio de inferencia empresarial en la nube (*NVIDIA Inference Microservice* en `integrate.api.nvidia.com`). Proporciona contenedores optimizados con aceleración de GPU (TensorRT-LLM) para servir modelos de lenguaje con baja latencia.
-3. **¿Qué es el LLM?**  
-   Es el modelo de lenguaje fundacional (*Large Language Model*, como Llama-3.1 o Nemotron). Actúa como el intérprete cognitivo que entiende el lenguaje natural del usuario y sintetiza respuestas profesionales bajo el prompt de sistema.
-4. **Seguridad y Cero Exposición de Llaves:**  
-   Muestra el archivo `backend/.env` y el `.gitignore`. Demuestra que la `NVIDIA_API_KEY` reside exclusivamente en el servidor backend; el frontend nunca la conoce ni viaja en ningún payload HTTP.
-
-### Minuto 3:45 - 4:45 | Gobernanza, Filtro Anti-Desvío y Casos Límite
-- En el chat, envía preguntas ajenas a pedidos:
-  - `Dame una receta para hacer una pizza` o `Escribe un poema`  
-    *Resultado:* Se activa el filtro estricto y contesta textualmente la frase de rúbrica.
-  - `Quiero rastrear mi paquete` (sin ID)  
-    *Resultado:* El bot detecta el dato faltante y solicita el número con formato `ORD-####`.
-- Muestra el botón **"Reiniciar Demo"** en la tabla para restaurar los pedidos originales en 1 segundo.
-
-### Minuto 4:45 - 5:00 | Cierre y Agradecimiento
-- Agradece la atención del M. C. Fernando Morquecho y abre la sesión para cualquier pregunta adicional.
-
----
-
-## 🔒 7. Políticas de Seguridad y Gobernanza
-
-1. **Blindaje de Credenciales:** El archivo `.gitignore` prohíbe de manera estricta subir cualquier archivo `.env`, `.env.local` o llaves criptográficas.
-2. **Control de Desvío (Off-Topic Guardrails):** Un filtro léxico-semántico previo intercepta intentos de inyección o consultas no comerciales antes de consumir tokens innecesarios de inferencia.
-3. **Transacciones Seguras:** Ninguna acción destructiva (como cancelar un pedido) se ejecuta sin confirmación explícita previa del cliente.
+1. **[0:00 - 1:00] Landing Page y Tabla de Pedidos:** Demostración de `http://localhost:5173`, catálogo y pedidos `ORD-1001` a `ORD-1004`.
+2. **[1:00 - 2:30] Chatbot en Acción:** Estatus de `ORD-1001`, rastreo en Tijuana de `ORD-1002`, validación de no-cancelación, y cancelación en 2 pasos de `ORD-1004` con reactividad en vivo en la tabla.
+3. **[2:30 - 3:45] Los 4 Conceptos Clave de Rúbrica:**
+   - **Aplicación Local:** BFF en FastAPI (:8000) y cliente React (:5173).
+   - **NVIDIA NIM:** Microservicio de inferencia en la nube en `integrate.api.nvidia.com`.
+   - **El LLM:** `nvidia/nemotron-3-ultra-550b-a55b` como cerebro cognitivo.
+   - **Seguridad:** Cero exposición de API Keys (aisladas en `.env` bajo `.gitignore`).
+4. **[3:45 - 4:45] Gobernanza y Casos Límites:** Rechazo estricto de temas ajenos (pizza/poema) y manejo de falta de ID. Botón para reiniciar la demo.
+5. **[4:45 - 5:00] Cierre y Agradecimientos:** Conclusión y sesión de preguntas con el M. C. Fernando Morquecho.
