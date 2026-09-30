@@ -12,6 +12,28 @@ const SUGGESTIONS = [
   { label: "Sin ID (Dato faltante)", prompt: "Quiero rastrear mi paquete" }
 ];
 
+const renderFormattedContent = (text) => {
+  if (!text) return null;
+  const lines = text.split('\n');
+  return lines.map((line, lIdx) => {
+    const parts = line.split(/(\*\*.*?\*\*)/g);
+    return (
+      <span key={lIdx} className="block min-h-[1.25rem]">
+        {parts.map((part, pIdx) => {
+          if (part.startsWith('**') && part.endsWith('**') && part.length >= 4) {
+            return (
+              <strong key={pIdx} className="font-bold">
+                {part.slice(2, -2)}
+              </strong>
+            );
+          }
+          return part;
+        })}
+      </span>
+    );
+  });
+};
+
 export default function ChatWidget({ onOrderUpdated }) {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
@@ -177,7 +199,7 @@ export default function ChatWidget({ onOrderUpdated }) {
                         ? 'bg-rose-50 text-rose-800 border border-rose-200 rounded-tl-xs'
                         : 'bg-white text-slate-800 border border-slate-200/80 rounded-tl-xs'
                   }`}>
-                    <p className="whitespace-pre-wrap">{msg.content}</p>
+                    <div className="space-y-1">{renderFormattedContent(msg.content)}</div>
 
                     {/* Metadata de Tool (si aplica) */}
                     {msg.toolCalled && (
