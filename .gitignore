@@ -1,0 +1,36 @@
+# Entornos Virtuales y Python
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Variables de entorno y llaves secretas (Criterio de Evaluación: No exposición)
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# Dependencias de Node y frontend
+node_modules/
+dist/
+build/
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Salesforce CLI
+.sf/
