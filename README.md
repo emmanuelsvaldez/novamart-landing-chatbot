@@ -5,7 +5,7 @@
 > **Instructor:** M. C. Fernando Morquecho  
 > **Fecha de Evaluación:** Miércoles 30 de septiembre de 2026  
 > **Modelo en Inferencia:** `nvidia/nemotron-3-ultra-550b-a55b` (NVIDIA NIM)  
-> **Autor / Full-Stack Developer:** Emmanuel Sánchez  
+> **Autores (Equipo 3):** Emmanuel Sánchez, Roberto, Baldomero, Raquel  
 > 📺 **Video Demostrativo en YouTube:** [https://youtu.be/q-2JvYxbiRQ](https://youtu.be/q-2JvYxbiRQ)
 
 ## 📺 Video de Demostración en Vivo

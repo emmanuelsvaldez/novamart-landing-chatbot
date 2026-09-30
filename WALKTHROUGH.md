@@ -4,7 +4,7 @@
 > **Bootcamp SKALA:** Inteligencia Artificial & Agentes Enterprise  
 > **Instructor:** M. C. Fernando Morquecho  
 > **Fecha de Evaluación:** Miércoles 30 de septiembre de 2026  
-> **Autor / Full-Stack Developer:** Emmanuel Sánchez  
+> **Autores (Equipo 3):** Emmanuel Sánchez, Roberto, Baldomero, Raquel  
 > **Ubicación del Monorepo:** `D:\novamart_landing_chatbot`
 
 ## 📺 Video Demostrativo en Vivo
