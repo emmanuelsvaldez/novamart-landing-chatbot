@@ -39,7 +39,7 @@ export default function Hero() {
               <span>Explorar Catálogo</span>
             </a>
             <a
-              href="https://youtu.be/AeL1Lu7lOTw"
+              href="https://youtu.be/q-2JvYxbiRQ"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 font-semibold text-sm shadow-xs hover:bg-rose-100 transition-all active:scale-95"

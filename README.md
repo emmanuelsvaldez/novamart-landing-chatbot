@@ -6,13 +6,13 @@
 > **Fecha de Evaluación:** Miércoles 30 de septiembre de 2026  
 > **Modelo en Inferencia:** `nvidia/nemotron-3-ultra-550b-a55b` (NVIDIA NIM)  
 > **Autor / Full-Stack Developer:** Emmanuel Sánchez  
-> 📺 **Video Demostrativo en YouTube:** [https://youtu.be/AeL1Lu7lOTw](https://youtu.be/AeL1Lu7lOTw)
+> 📺 **Video Demostrativo en YouTube:** [https://youtu.be/q-2JvYxbiRQ](https://youtu.be/q-2JvYxbiRQ)
 
 ---
 
 ## 📺 Video de Demostración en Vivo
 Haz clic en el enlace a continuación para ver el video completo demostrando todos los criterios de la rúbrica en acción:
-👉 **[Ver Demostración en YouTube (https://youtu.be/AeL1Lu7lOTw)](https://youtu.be/AeL1Lu7lOTw)**
+👉 **[Ver Demostración en YouTube (https://youtu.be/q-2JvYxbiRQ)](https://youtu.be/q-2JvYxbiRQ)**
 
 ---
 

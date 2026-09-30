@@ -3,7 +3,7 @@
 > **Bootcamp SKALA - Inteligencia Artificial & Agentes Enterprise (Semana 3)**  
 > **Patrón Arquitectónico:** BFF (Backend for Frontend) Desacoplado  
 > **Inferencia:** NVIDIA NIM Cloud Runtime (`nvidia/nemotron-3-ultra-550b-a55b`)  
-> **Video Demostrativo:** https://youtu.be/AeL1Lu7lOTw
+> **Video Demostrativo:** https://youtu.be/q-2JvYxbiRQ
 
 ---
 
