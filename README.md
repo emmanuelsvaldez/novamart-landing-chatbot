@@ -10,7 +10,7 @@
 
 ## 🎯 1. Resumen Ejecutivo y Rúbrica de Evaluación (100 / 100 Puntos)
 
-Este proyecto implementa una solución desacoplada de extremo a extremo basada en el patrón arquitectónico **BFF (Backend for Frontend)** para la tienda departamental **NovaMart**. Consta de una **Landing Page comercial responsiva** en React con una **tabla reactiva de pedidos** y un **Widget de Chatbot flotante** gobernado por **Guardrails deterministas** y conectado al servicio de inferencia en la nube de **NVIDIA NIM** (familia Nemotron / Llama-3.1).
+Este proyecto implementa una solución desacoplada de extremo a extremo basada en el patrón arquitectónico **BFF (Backend for Frontend)** para la tienda departamental **NovaMart**. Consta de una **Landing Page comercial responsiva** en React con una **tabla reactiva de pedidos** y un **Widget de Chatbot flotante** gobernado por **Guardrails deterministas** y conectado al servicio de inferencia en la nube de **NVIDIA NIM** (familia NVIDIA Nemotron 3 Ultra (550B)).
 
 ### Matriz de Cumplimiento Técnico de la Rúbrica
 
@@ -55,7 +55,7 @@ Este proyecto implementa una solución desacoplada de extremo a extremo basada e
 +-----------------------------------------------------------------------------------+
 |                     PROVEEDOR DE INFERENCIA CLOUD: NVIDIA NIM                     |
 |  - Endpoint: https://integrate.api.nvidia.com/v1                                  |
-|  - Modelo: meta/llama-3.1-70b-instruct / nvidia/nemotron-4-340b-instruct         |
+|  - Modelo: nvidia/nemotron-3-ultra-550b-a55b         |
 +-----------------------------------------------------------------------------------+
 ```
 
@@ -126,7 +126,7 @@ novamart_landing_chatbot/
    ```bash
    NVIDIA_API_KEY=nvapi-TU-LLAVE-AQUI
    NVIDIA_BASE_URL=https://integrate.api.nvidia.com/v1
-   NVIDIA_MODEL=meta/llama-3.1-70b-instruct
+   NVIDIA_MODEL=nvidia/nemotron-3-ultra-550b-a55b
    PORT=8000
    ```
    *(Nota: Si no cuentas con llave activa en el momento de la prueba, el sistema incluye un motor con guardrails deterministas que responderá con 100% de apego a la rúbrica sin interrumpir la demo).*

@@ -133,7 +133,7 @@ Sigue este guion paso a paso durante tu evaluación con el profesor Fernando Mor
 Desplázate a la sección **"Arquitectura Enterprise NovaMart"** en la Landing y explica los 4 conceptos:
 1. **Aplicación Local:** Es el BFF desacoplado compuesto por el frontend en **React + Vite (:5173)** y el servidor en **FastAPI (:8000)** con la base de datos en memoria y guardrails deterministas.
 2. **NVIDIA NIM:** Es el microservicio de inferencia en la nube (*NVIDIA Inference Microservice* en `integrate.api.nvidia.com`) optimizado con aceleración TensorRT-LLM para ejecutar modelos fundacionales con baja latencia.
-3. **El LLM:** Es la red neuronal generativa (familia Llama-3.1-70B / Nemotron) que interpreta la semántica del usuario y sintetiza las respuestas profesionales bajo el prompt de sistema.
+3. **El LLM:** Es la red neuronal generativa (familia nvidia/nemotron-3-ultra-550b-a55b) que interpreta la semántica del usuario y sintetiza las respuestas profesionales bajo el prompt de sistema.
 4. **Seguridad y Cero Leaks:** Enseña el archivo `backend/.env` y el `.gitignore`. Demuestra que la llave `NVIDIA_API_KEY` vive 100% en el servidor y jamás se expone al navegador ni en Git.
 
 ### [3:45 - 4:45] Gobernanza, Casos Límites y Reactividad

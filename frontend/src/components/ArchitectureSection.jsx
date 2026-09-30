@@ -58,10 +58,10 @@ export default function ArchitectureSection() {
             <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-wider">Concepto 3</span>
             <h3 className="text-lg font-bold text-slate-900 mt-1">El LLM (Cerebro)</h3>
             <p className="text-xs text-slate-600 mt-2 leading-relaxed flex-1">
-              Red neuronal fundacional (familia <strong>Nemotron / Llama-3.1-70B</strong>) que realiza comprensión semántica de intenciones humanas y sintetiza respuestas profesionales bajo el prompt de sistema inyectado.
+              Red neuronal fundacional de alta capacidad (<strong>nvidia/nemotron-3-ultra-550b-a55b</strong>) que realiza comprensión semántica de intenciones humanas y sintetiza respuestas profesionales bajo el prompt de sistema inyectado.
             </p>
-            <div className="mt-4 pt-3 border-t border-slate-200 text-[11px] text-slate-500 font-mono">
-              meta/llama-3.1-70b-instruct
+            <div className="mt-4 pt-3 border-t border-slate-200 text-[11px] text-slate-500 font-mono font-semibold text-indigo-600 truncate" title="nvidia/nemotron-3-ultra-550b-a55b">
+              nvidia/nemotron-3-ultra-550b-a55b
             </div>
           </div>
 
