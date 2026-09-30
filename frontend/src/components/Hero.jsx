@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Zap, Bot, ArrowRight, CheckCircle2, Video } from 'lucide-react';
+import { ShieldCheck, Zap, Bot, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export default function Hero() {
   return (
@@ -37,38 +37,6 @@ export default function Hero() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-700 font-semibold text-sm border border-slate-300 shadow-sm hover:bg-slate-50 transition-all"
             >
               <span>Explorar Catálogo</span>
-            </a>
-            <a
-              href="https://youtu.be/q-2JvYxbiRQ"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 font-semibold text-sm shadow-xs hover:bg-rose-100 transition-all active:scale-95"
-            >
-              <Video className="w-4 h-4 text-rose-600" />
-              <span>Ver Video Demo</span>
-            </a>
-          </div>
-
-          {/* Banner Interactivo del Video Demo */}
-          <div className="mt-8 max-w-xl mx-auto rounded-2xl overflow-hidden border border-slate-200 shadow-xl shadow-slate-200/60 group relative bg-slate-900">
-            <a 
-              href="https://youtu.be/q-2JvYxbiRQ"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block relative overflow-hidden"
-              title="Ver video demostrativo en YouTube"
-            >
-              <img 
-                src="/thumbnail_showcase.jpg" 
-                alt="NVIDIA NIM + React NovaMart Showcase" 
-                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-rose-600 text-white font-bold text-xs shadow-lg transform group-hover:scale-105 transition-transform">
-                  <Video className="w-4 h-4" />
-                  <span>Reproducir Video en YouTube</span>
-                </span>
-              </div>
             </a>
           </div>
 
