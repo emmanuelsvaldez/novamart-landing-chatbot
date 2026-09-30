@@ -63,18 +63,18 @@ flowchart TD
         NIM_API["NVIDIA NIM Runtime API\n(integrate.api.nvidia.com/v1)\nModelo: nvidia/nemotron-3-ultra-550b-a55b"]
     end
 
-    ChatWidget -->|POST /api/chat {message, history}| CORS
-    OrdersView -->|GET /api/orders| CORS
-    OrdersView -->|POST /api/orders/reset| CORS
+    ChatWidget -->|"POST /api/chat (message, history)"| CORS
+    OrdersView -->|"GET /api/orders"| CORS
+    OrdersView -->|"POST /api/orders/reset"| CORS
     CORS --> Router
     Router --> Guardrails
-    Guardrails -- "Tema Ajeno (Pizza, Poema)" --> Router
-    Guardrails -- "Dato Faltante (Sin ORD-####)" --> Router
-    Guardrails -- "Confirmación Sí / Cancelación" --> Tools
-    Guardrails -- "Consulta Válida" --> Tools
+    Guardrails -->|"Tema Ajeno (Pizza, Poema)"| Router
+    Guardrails -->|"Dato Faltante (Sin ORD-####)"| Router
+    Guardrails -->|"Confirmación Sí / Cancelación"| Tools
+    Guardrails -->|"Consulta Válida"| Tools
     Tools <--> MockDB
     Tools --> NIM_Service
-    NIM_Service <-->|TLS / OpenAI SDK Client| NIM_API
+    NIM_Service <-->|"TLS / OpenAI SDK Client"| NIM_API
 ```
 
 ### 2.2 Diagrama de Secuencia: Flujo de Cancelación en 2 Fases
